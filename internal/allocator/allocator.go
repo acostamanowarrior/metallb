@@ -451,7 +451,7 @@ func poolCount(p *config.Pool) (int64, int64, int64) {
 		if p.AvoidBuggyIPs {
 			if o <= 24 {
 				// A pair of buggy IPs occur for each /24 present in the range.
-				buggies := int64(math.Pow(2, float64(24-o))) * 2
+				buggies := int64(math.Pow(2, float64(24-o))) * 4
 				sz -= buggies
 			} else {
 				// Ranges smaller than /24 contain 1 buggy IP if they
