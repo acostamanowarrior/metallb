@@ -450,7 +450,7 @@ func poolCount(p *config.Pool) (int64, int64, int64) {
 
 		if p.AvoidBuggyIPs {
 			if o <= 24 {
-				// A pair of buggy IPs occur for each /24 present in the range.
+				// 4 buggy IPs occur for each /24 present in the range.
 				buggies := int64(math.Pow(2, float64(24-o))) * 4
 				sz -= buggies
 			} else {
@@ -506,7 +506,7 @@ func ipConfusesBuggyFirmwares(ip net.IP) bool {
 	if ip == nil {
 		return false
 	}
-	return ip[3] == 0 || ip[3] == 255
+	return ip[3] == 0 || ip[3] == 1 || ip[3] == 254 || ip[3] == 255
 }
 
 func (a *Allocator) getIPFromCIDR(cidr *net.IPNet, avoidBuggyIPs bool, svc string, ports []Port, sharingKey, backendKey string) net.IP {
